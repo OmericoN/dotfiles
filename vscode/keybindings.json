@@ -1,0 +1,109 @@
+// Place your key bindings in this file to override the defaults
+[
+  // -------------------
+  // LEADER KEY CONFIG
+  // -------------------
+  // Leader key in VSCodeVim should be set in settings.json:
+  // "vim.leader": " "
+  // We'll map <leader> shortcuts here to VSCode commands
+
+  // -------------------
+  // EXPLORER / FILE TREE
+  // -------------------
+  {
+    "key": "ctrl+e",
+    "command": "workbench.view.explorer",
+    "when": "!sidebarVisible",
+  },
+  {
+    "key": "ctrl+e",
+    "command": "workbench.action.closeSidebar",
+    "when": "sidebarVisible",
+  },
+  // {
+  //   "key": "ctrl+e",
+  //   "command": "workbench.action.toggleSidebarVisibility",
+  // },
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus && !inputFocus",
+  },
+  {
+    "key": "shift+n",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletFocus && !inputFocus",
+  },
+  {
+    "key": "r",
+    "command": "renameFile",
+    "when": "explorerViewletFocus && !inputFocus",
+  },
+  {
+    "key": "d",
+    "command": "deleteFile",
+    "when": "explorerViewletFocus && !inputFocus",
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "workbench.files.action.refreshFilesExplorer",
+  },
+
+  // -------------------
+  // TERMINAL
+  // -------------------
+  {
+    "key": "ctrl+shift+a",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus",
+  },
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus",
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.togglePanel",
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalFocus",
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus",
+  },
+  {
+    "key": "ctrl+/",
+    "command": "workbench.action.terminal.toggleTerminal",
+  },
+
+  // ---------------
+  // Copilot
+  // ---------------
+  {
+    "key": "ctrl+;",
+    "command": "workbench.action.chat.toggle",
+  },
+  {
+    "key": "ctrl+shift+;",
+    "command": "workbench.action.toggleSecondarySideBar",
+  },
+
+  //--------------
+  // Source Control
+  //--------------
+  {
+    "key": "ctrl+'",
+    "command": "workbench.view.scm",
+    "when": "!sidebarVisible",
+  },
+  {
+    "key": "ctrl+'",
+    "command": "workbench.action.closeSidebar",
+    "when": "sidebarVisible",
+  },
+]
