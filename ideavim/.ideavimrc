@@ -1,0 +1,73 @@
+" =====================
+" IDEA VimRC for IntelliJ 2026 + Fuzzier
+" =====================
+
+set ideajoin
+
+" --- Leader key ---
+let mapleader="\<Space>"
+
+" --- General keybindings ---
+" Save
+nmap <leader>w :w<CR>
+" Quit
+nmap <leader>q :q<CR>
+" Save and quit
+nmap <leader>x :wq<CR>
+
+" --- Normal Mode Navigation ---
+" Better scrolling
+nnoremap <C-d> 10j
+nnoremap <C-u> 10k
+
+" --- Fuzzier mappings ---
+" Map <Space><Space> to FuzzyGrep
+nmap <leader><leader> <action>(com.mituuz.fuzzier.search.Fuzzier)
+" Move in Fuzzier search using j/k
+inoremap j <C-n>
+inoremap k <C-p>
+
+" --- Fast reload vimrc ---
+nnoremap <leader>sv :source ~/.ideavimrc<CR>
+
+" --- Insert mode shortcuts to exit ---
+" jk → escape
+inoremap jk <Esc>
+" jj → escape
+inoremap jj <Esc>
+
+" =====================
+" IntelliJ Navigation (LSP-like)
+" =====================
+
+" Go to Definition (gd)
+map gd <action>(GotoDeclaration)
+" Go to Instances
+map gr <action>(FindUsages)
+
+" Go back (like Ctrl+o in Vim)
+nnoremap <C-o> <action>(Back)
+
+" Go forward
+nnoremap <C-i> <action>(Forward)
+
+" Switch tabs (buffers) like Vim
+" Cycle tabs like buffers
+map H <action>(PreviousTab)
+map L <action>(NextTab)
+
+" Split vertically (like :vsplit)
+map <leader>\| <action>(SplitVertically)
+
+" Split horizontally (like :split)
+map <leader>- <action>(SplitHorizontally)
+
+" =====================
+" Window navigation
+" =====================
+" Move between splits with Ctrl + h/j/k/l
+" Move between editor splits
+map <C-h> <action>(FocusLeftEditor)
+map <C-l> <action>(FocusRightEditor)
+map <C-k> <action>(FocusAboveEditor)
+map <C-j> <action>(FocusBelowEditor)
