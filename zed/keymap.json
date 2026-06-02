@@ -1,0 +1,261 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // ========================================================================
+  // GLOBAL OMNIPRESENT NAVIGATION FALLBACKS & MANAGEMENT
+  // ========================================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Global navigation fallback across docks & AI assistants
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+
+      // Map VSCode like keybindings
+      "cmd-b": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      // Force terminal sessions to yield navigation control back to the workspace
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // Mute the default Linux/Windows Ctrl+H Replace boxes completely
+      "ctrl-h": null,
+      "ctrl-l": null,
+      "ctrl-j": null,
+      "ctrl-k": null,
+    },
+  },
+
+  // ========================================================================
+  // SHARED MODAL NORMAL & VISUAL BINDINGS
+  // ========================================================================
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      // Snappy 5-Line jumps with locked layout centering
+      "ctrl-d": ["workspace::SendKeystrokes", "9 j z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "9 k z z"],
+
+      // Git
+      "space g h d": "editor::ToggleSelectedDiffHunks",
+      "space g s": "git_panel::ToggleFocus",
+      "space g g": "git_panel::ToggleFocus",
+
+      // Toggles
+      "space t i": "editor::ToggleInlayHints",
+      "space u w": "editor::ToggleSoftWrap",
+      "space c z": "workspace::ToggleCenteredLayout", // Zen Mode Toggle
+
+      // Previews & Projects
+      "space m p": "markdown::OpenPreview",
+      "space m P": "markdown::OpenPreviewToTheSide",
+      "space f p": "projects::OpenRecent",
+
+      // Search
+      "space s w": "pane::DeploySearch",
+      "space s b": "buffer_search::Deploy",
+
+      // AI Integration
+      "space a c": "agent::ToggleFocus",
+      "g f": "editor::OpenExcerpts",
+    },
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "s": ["vim::PushSneak", {}],
+      "S": ["vim::PushSneakBackward", {}],
+    },
+  },
+
+  // ========================================================================
+  // NORMAL MODE BINDINGS
+  // ========================================================================
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // Explicit 'zz' centering command
+      "z z": "editor::ScrollCursorCenter",
+
+      // Window Pane & Window Management
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+
+      // Leader Split Window Modifiers
+      "space -": "pane::SplitHorizontal",
+      "space |": "pane::SplitVertical",
+
+      // LSP Engineering Enhancements
+      "space c a": "editor::ToggleCodeActions",
+      "space .": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "g d": "editor::GoToDefinition",
+      "g D": "editor::GoToDefinitionSplit",
+      "g i": "editor::GoToImplementation",
+      "g I": "editor::GoToImplementationSplit",
+      "g t": "editor::GoToTypeDefinition",
+      "g T": "editor::GoToTypeDefinitionSplit",
+      "g r": "editor::FindAllReferences",
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
+      "] e": "editor::GoToDiagnostic",
+      "[ e": "editor::GoToPreviousDiagnostic",
+
+      // Symbol Searches
+      "s s": "outline::Toggle",
+      "s S": "project_symbols::Toggle",
+      "space x x": "diagnostics::Deploy",
+
+      // Git Hunks
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk",
+
+      // Buffer Tab Control (Shift + H/L)
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "shift-q": "pane::CloseActiveItem",
+      "ctrl-q": "pane::CloseActiveItem",
+      "space b d": "pane::CloseActiveItem",
+      "space b o": "pane::CloseOtherItems",
+      "ctrl-s": "workspace::Save",
+      "space q": "pane::CloseActiveItem",
+
+      // Finder & Structural Tools
+      "space space": "file_finder::Toggle",
+      "space /": "pane::DeploySearch",
+      "space r": "buffer_search::DeployReplace", // Find & Replace remapped to space leader
+      "space e": "pane::RevealInProjectPanel",
+    },
+  },
+
+  // ========================================================================
+  // DOCK, INTERACTIVE PICKERS & SIDEBAR CONTROL
+  // ========================================================================
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "A": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "q": "workspace::ToggleRightDock",
+      "space e": "workspace::ToggleRightDock",
+
+      // Omni navigation overrides forcing directional exit out of the file tree
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f p": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "EmptyPane || SharedScreen || vim_mode == normal",
+    "bindings": {
+      "space r t": ["editor::SpawnNearestTask", { "reveal": "no_focus" }],
+    },
+  },
+
+  // ========================================================================
+  // INSERT AND OPERATOR TRANSITION STATES
+  // ========================================================================
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+      "j k": "vim::NormalBefore",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      "g c": "editor::ToggleComments",
+    },
+  },
+  {
+    "context": "Editor && vim_operator == c",
+    "bindings": {
+      "c": "vim::CurrentLine",
+      "r": "editor::Rename",
+      "a": "editor::ToggleCodeActions",
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space": null,
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "ctrl-b": "vim::PageUp",
+    },
+  },
+  {
+    "context": "vim_mode == literal",
+    "unbind": {
+      "ctrl-b": ["vim::Literal", ["ctrl-b", "\u0002"]],
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-/": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle",
+    },
+  },
+]

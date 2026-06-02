@@ -183,6 +183,7 @@
 
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
+    "source.fixAll.ruff": "explicit",
     "source.organizeImports": "explicit",
   },
 
@@ -192,4 +193,5 @@
   "workbench.list.smoothScrolling": true,
   "editor.mouseWheelSmoothScroll": true,
   "editor.wordWrap": "on",
+  "notebook.lineNumbers": "on",
 }

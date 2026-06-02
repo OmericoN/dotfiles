@@ -1,0 +1,100 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle",
+      // Global navigation fallback
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      // Force terminal sessions to yield control back to window management
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // Mute the default Linux/Windows Ctrl+H Replace box completely
+      "ctrl-h": null,
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+      "j j": "vim::NormalBefore",
+    },
+  },
+  // ========================================================================
+  // 1. NEOVIM TABS & WINDOW PANE NAVIGATION (Shift + HJKL)
+  // ========================================================================
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "shift-l": "pane::ActivateNextItem", // Move one tab to the RIGHT
+      "shift-h": "pane::ActivatePreviousItem", // Move one tab to the LEFT
+    },
+  },
+  // ========================================================================
+  // 2. CORE IDE LEADER SHORTCUTS (Space Bar)
+  // ========================================================================
+  {
+    "context": "VimControl && vim_mode == normal",
+    "bindings": {
+      // Sidebar & Window Management
+      "space e": "project_panel::ToggleFocus", // Open/Close left sidebar file tree
+      "space q": "pane::CloseActiveItem", // Close current active file buffer
+      "space w": "workspace::Save", // Instant save file
+
+      // Telescope-Style Searching
+      "space f": "file_finder::Toggle", // Fuzzy find files by name
+      "space /": "pane::DeploySearch", // Project-wide live string grep
+      "space s": "outline::Toggle", // Open file outline (symbol list)
+
+      // LSP Engineering Enhancements
+      "space d": "diagnostics::Deploy", // Toggle bottom errors/warnings dashboard
+      "g h": "editor::Hover", // Pop up type documentation on cursor
+      "g .": "editor::ToggleCodeActions", // Run quick fixes / auto-imports
+      "g r": "editor::FindAllReferences", // Explicit fix for locating word instances
+
+      // Leader Split Window Modifiers
+      "space -": "pane::SplitHorizontal", // Space + Minus for Horizontal Split
+      "space |": "pane::SplitVertical", // Space + Pipe for Vertical Split
+    },
+  },
+  // ========================================================================
+  // 3. SEAMLESS FILE TREE NAVIGATION (HJKL Sidebar Control)
+  // ========================================================================
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "h": "project_panel::CollapseSelectedEntry",
+      "l": "project_panel::ExpandSelectedEntry",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious",
+      "enter": "project_panel::OpenPermanent",
+      "a": "project_panel::NewFile",
+      "d": "project_panel::Delete",
+
+      // ADD THESE TWO LINES INSIDE THIS BLOCK:
+      "ctrl-l": "workspace::ActivateNextPane", // Jump right, back into code
+      "escape": "workspace::ActivateNextPane", // Hit escape to drop back to code
+    },
+  },
+]
